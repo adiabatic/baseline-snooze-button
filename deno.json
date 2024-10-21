@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "clone": "git clone git@github.com:web-platform-dx/web-features.git",
+    "once": "deno run --allow-read=web-features --allow-env=LOG_TOKENS,LOG_STREAM main.ts",
+    "dev": "deno run --allow-read=web-features --allow-env=LOG_TOKENS,LOG_STREAM --watch main.ts"
+  }
+}
