@@ -72,8 +72,8 @@ for (const [source, dist] of zip(sources, dists)) {
   outs.push(out);
 }
 
-const highs = outs.filter((out) => !!out.baseline_high_date);
-const lows = outs.filter((out) => !!out.baseline_low_date);
+const highs = structuredClone(outs).filter((out) => !!out.baseline_high_date);
+const lows = structuredClone(outs).filter((out) => !!out.baseline_low_date);
 
 highs.sort((lhs, rhs) => {
   return ("" + lhs.baseline_high_date).localeCompare(
