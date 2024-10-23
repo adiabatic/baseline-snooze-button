@@ -72,20 +72,32 @@ for (const [source, dist] of zip(sources, dists)) {
   outs.push(out);
 }
 
-const interestings = outs.filter((out) => !!out.baseline_high_date);
+const highs = outs.filter((out) => !!out.baseline_high_date);
+const lows = outs.filter((out) => !!out.baseline_low_date);
 
-interestings.sort((lhs, rhs) => {
+highs.sort((lhs, rhs) => {
   return ("" + lhs.baseline_high_date).localeCompare(
     rhs.baseline_high_date as string
   );
 });
 
-for (const i of interestings) {
+lows.sort((lhs, rhs) => {
+  return ("" + lhs.baseline_low_date).localeCompare(
+    rhs.baseline_low_date as string
+  );
+});
+
+for (const i of highs) {
   delete i.baseline;
   delete i.baseline_low_date;
 }
 
-let output =  YAML.stringify(interestings);
+for (const i of lows) {
+  delete i.baseline;
+  delete i.baseline_high_date;
+}
+
+let output = YAML.stringify(lows);
 output = output.replaceAll("\n-", "\n\n-");
 
 console.log(output);
