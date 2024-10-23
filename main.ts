@@ -80,4 +80,12 @@ interestings.sort((lhs, rhs) => {
   );
 });
 
-console.log(YAML.stringify(interestings));
+for (const i of interestings) {
+  delete i.baseline;
+  delete i.baseline_low_date;
+}
+
+let output =  YAML.stringify(interestings);
+output = output.replaceAll("\n-", "\n\n-");
+
+console.log(output);
